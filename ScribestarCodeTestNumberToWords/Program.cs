@@ -17,24 +17,23 @@ namespace ScribestarCodeTestNumberToWords
         }
         static void Main(string[] args)
         {
-            var foo = Console.ReadLine();
+            Console.WriteLine("Please enter numbers (Press q to quit):");
+            var userInput = Console.ReadLine();
 
-            if (int.TryParse(foo, out int num))
+            while (userInput != "q")
             {
-                var numberSpeller = container.GetInstance<NumberSpeller>();
-                var words = numberSpeller.SpellNumber(num);
-                Console.WriteLine($"{num} = {words}");
-            }
-            else
-            {
-                Console.WriteLine($"{foo} is not a number");
+                if (int.TryParse(userInput, out int num))
+                {
+                    var numberSpeller = container.GetInstance<NumberSpeller>();
+                    var words = numberSpeller.SpellNumber(num);
+                    Console.WriteLine($"{num} = {words}");
+                }
+                else
+                {
+                    Console.WriteLine($"{userInput} is not a number");
 
-            }
-            Console.ReadLine();
-            var key = Console.ReadKey();
-            if (key.Key == ConsoleKey.Escape)
-            {
-                Environment.Exit(0);
+                }
+                userInput= Console.ReadLine();
             }
         }
     }

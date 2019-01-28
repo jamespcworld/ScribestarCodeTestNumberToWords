@@ -19,6 +19,7 @@ namespace ScribestarCodeTestNumberToWords
         private bool HasOnes { get { return Length >= 1; } }
         private bool HasTens { get { return Length >= 2; } }
         private bool HasHundreds { get { return Length == 3; } }
+        private bool IsDivisibleByOneHundred { get { return (HasHundreds) ?(( _digits[2]*100+ _digits[1] * 10+ _digits[0])  % 100 == 0):true; } }
 
         private int Ones
         {
@@ -52,7 +53,10 @@ namespace ScribestarCodeTestNumberToWords
                 // append hundred
                 result.Add(NumberNames.Triplets[0]);
             }
-
+            if (!IsDivisibleByOneHundred)
+            {
+                result.Add("and");
+            }
             if (HasTens && Tens > 0)
             {
                 // tens are beetween 11 and 19
